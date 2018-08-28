@@ -13,9 +13,7 @@ module BalikobotApi
     # Adds package/packages into group which will be picked up.
     def add(transporter, data)
       endpoint_url = "#{@api_url}/#{transporter}/add"
-      body = {
-        data: data
-      }
+      body = data
       RequestMaker.new(@api_user, @api_secret).send_post_request(endpoint_url, body)
     end
 
@@ -30,9 +28,7 @@ module BalikobotApi
     # In body can be data for one package or array of multiple packages.
     def drop(transporter, data)
       endpoint_url = "#{@api_url}/#{transporter}/drop"
-      body = {
-        data: data
-      }
+      body = data
       RequestMaker.new(@api_user, @api_secret).send_post_request(endpoint_url, body)
     end
 
@@ -40,28 +36,21 @@ module BalikobotApi
     # Maximum packages count in one request is 4!
     def track(transporter, data)
       endpoint_url = "#{@api_url}/#{transporter}/track"
-      body = {
-        data: data
-      }
+      body = data
       RequestMaker.new(@api_user, @api_secret).send_post_request(endpoint_url, body)
     end
 
     # Returns last state of package/packages in number format and text comment.
     def track_status(transporter, data)
       endpoint_url = "#{@api_url}/#{transporter}/trackstatus"
-      body = {
-        data: data
-      }
+      body = data
       RequestMaker.new(@api_user, @api_secret).send_post_request(endpoint_url, body)
     end
 
     # Returns list of unsent packages.
-    def overview(transporter, data)
+    def overview(transporter)
       endpoint_url = "#{@api_url}/#{transporter}/overview"
-      body = {
-        data: data
-      }
-      RequestMaker.new(@api_user, @api_secret).send_post_request(endpoint_url, body)
+      RequestMaker.new(@api_user, @api_secret).send_post_request(endpoint_url)
     end
 
     # Returns PDF with labels of one or multiple packages.
@@ -81,10 +70,8 @@ module BalikobotApi
 
     # Returns complete information about package.
     def order(transporter, data)
-      endpoint_url = "#{@api_url}/#{transporter}/labels"
-      body = {
-        package_ids: package_ids
-      }
+      endpoint_url = "#{@api_url}/#{transporter}/order"
+      body = data
       RequestMaker.new(@api_user, @api_secret).send_post_request(endpoint_url, body)
     end
 

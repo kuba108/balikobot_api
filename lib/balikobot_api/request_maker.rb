@@ -3,9 +3,10 @@ require "base64"
 module BalikobotApi
   class RequestMaker
 
-    attr_reader :api_user, :api_secret
+    attr_reader :errors, :api_user, :api_secret
 
     def initialize(api_user, api_secret)
+      @errors = []
       @api_user = api_user
       @api_secret = api_secret
     end
@@ -16,10 +17,9 @@ module BalikobotApi
       raw_response = connection.post do |req|
         req.body = request.body
       end
-      debugger
       response = build_response(raw_response)
       ResponseValidator.new.validate_response(response)
-      true
+      response
     end
 
     private

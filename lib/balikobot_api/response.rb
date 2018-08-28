@@ -15,7 +15,7 @@ module BalikobotApi
     end
 
     def response_status
-      @body['status'] if @body.present?
+      @body['status'].to_i if @body.present?
     end
 
     def response_message
