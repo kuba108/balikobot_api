@@ -6,7 +6,7 @@ module BalikobotApi
         # response.body.first.each do |response_item|
         #   response_item['errors']
         # end
-        #raise "Error in progress!"
+        raise "Error in progress!"
       end
     end
 
