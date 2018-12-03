@@ -18,9 +18,9 @@ module BalikobotApi
       end
       response = build_response(raw_response)
       if response.valid?
-        response
         {
           result: 'success',
+          response: response,
           response_status: response.response_status,
           msg: "All packages was accepted by Balikobot."
         }
@@ -28,6 +28,7 @@ module BalikobotApi
         response.parse_errors
         {
           result: 'error',
+          response: response,
           response_status: response.response_status,
           errors: response.errors,
           msg: "Response from Balikobot was not successful."
