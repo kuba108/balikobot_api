@@ -2,14 +2,19 @@ module BalikobotApi
   class ResponseValidator
 
     def validate_response(response)
-      if (200..299).include?(response.response_status)
-        true
-      else
-        raise "Error in progress!"
-        # response.body.first.each do |response_item|
-        #   response_item['errors']
-        # end
+      errors = []
+      if (200..299).exclude?(response.response_status)
+        # raise "Error in progress!"
+        packages_results = response.body.map { |k,v| v if k != 'status' }.compact
+        packages_results.each do |package_result|
+          if package_result['errors'].present?
+            package_result['errors'].values.each do |package_error|
+              errors << package_error
+            end
+          end
+        end
       end
+      errors
     end
 
   end

@@ -3,10 +3,9 @@ require "base64"
 module BalikobotApi
   class RequestMaker
 
-    attr_reader :errors, :api_user, :api_secret
+    attr_reader :api_user, :api_secret
 
     def initialize(api_user, api_secret)
-      @errors = []
       @api_user = api_user
       @api_secret = api_secret
     end
@@ -18,8 +17,22 @@ module BalikobotApi
         req.body = request.body
       end
       response = build_response(raw_response)
-      ResponseValidator.new.validate_response(response)
-      response
+      if response.valid?
+        response
+        {
+          result: 'success',
+          response_status: response.response_status,
+          msg: "All packages was accepted by Balikobot."
+        }
+      else
+        response.parse_errors
+        {
+          result: 'error',
+          response_status: response.response_status,
+          errors: response.errors,
+          msg: "Response from Balikobot was not successful."
+        }
+      end
     end
 
     private
