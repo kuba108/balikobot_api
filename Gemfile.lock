@@ -14,7 +14,7 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     minitest (5.11.3)
     multipart-post (2.0.0)
-    rake (10.5.0)
+    rake (13.0.3)
 
 PLATFORMS
   ruby
@@ -23,7 +23,7 @@ DEPENDENCIES
   balikobot_api!
   bundler (~> 1.16)
   minitest (~> 5.0)
-  rake (~> 10.0)
+  rake (~> 13.0)
 
 BUNDLED WITH
    1.16.2
